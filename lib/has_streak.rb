@@ -1,5 +1,7 @@
 require "has_streak/version"
+require "has_streak/streakable"
+require "active_record"
 
 module HasStreak
-  # Your code goes here...
+  ActiveRecord::Base.extend Streakable
 end
