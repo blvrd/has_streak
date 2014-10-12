@@ -7,10 +7,10 @@ Gem::Specification.new do |spec|
   spec.name          = "has_streak"
   spec.version       = HasStreak::VERSION
   spec.authors       = ["Garrett Martin"]
-  spec.email         = ["garrettqmartin8@optimum.net"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.email         = ["me@garrettqmartin.com"]
+  spec.description   = %q{Easily track streaks on your ActiveRecord models.}
+  spec.summary       = %q{Easily track streaks on your ActiveRecord models.}
+  spec.homepage      = "https://github.com/garrettqmartin8/has_streak"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
