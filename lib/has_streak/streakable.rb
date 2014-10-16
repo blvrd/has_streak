@@ -15,12 +15,12 @@ module HasStreak
       private
 
       def get_days_in_descending_order(association)
-        self.send(association).order("created_at DESC").pluck(:created_at).map(&:day)
+        self.send(association).order(:created_at).pluck(:created_at).map(&:to_date).uniq
       end
 
       def determine_consecutive_days(days)
-        days.each_with_index.inject(1) do |streak, (day, index)|
-          streak += 1 if day - 1 == days[index + 1]
+        days.each_with_index.inject(0) do |streak, (day, index)|
+          streak += 1 if day + 1 == day.tomorrow
           streak
         end
       end
