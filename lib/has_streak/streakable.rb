@@ -45,7 +45,7 @@ module HasStreak
       def longest_streak(dates)
         to_streaks(date_time_array).sort do |streak_one, streak_two|
           [ streak_two.length, streak_two[0] ] <=> [ streak_one.length, streak_one[0] ]
-        end
+        end.first
       end
       
       # now we only have to ask 'how long is the longest streak?'
