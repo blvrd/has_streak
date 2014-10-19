@@ -7,7 +7,7 @@ describe HasStreak::Streakable do
     it "returns a streak of 3" do
       user.posts.create(content: "hello", created_at: 2.days.ago)
       user.posts.create(content: "hello", created_at: 1.day.ago)
-      user.posts.create(content: "hello")
+      user.posts.create(content: "hello", created_at: DateTime.current)
 
       expect(user.streak(:posts)).to eq(3)
     end
@@ -15,7 +15,7 @@ describe HasStreak::Streakable do
     it "returns streak of one (no streak)" do
       user.posts.create(content: "hello", created_at: 5.days.ago)
       user.posts.create(content: "hello", created_at: 2.days.ago)
-      user.posts.create(content: "hello")
+      user.posts.create(content: "hello", created_at: DateTime.current)
 
       expect(user.streak(:posts)).to eq(1)
     end
