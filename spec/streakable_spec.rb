@@ -12,6 +12,14 @@ describe HasStreak::Streakable do
       expect(user.streak(:posts)).to eq(3)
     end
 
+    it "returns streak of one (no streak)" do
+      user.posts.create(content: "hello", created_at: 5.days.ago)
+      user.posts.create(content: "hello", created_at: 2.days.ago)
+      user.posts.create(content: "hello")
+
+      expect(user.streak(:posts)).to eq(1)
+    end
+
     context "spanning two months" do
       it "returns a streak of 2" do
         user.posts.create(content: "hello", created_at: Date.new.end_of_month)

@@ -19,8 +19,8 @@ module HasStreak
       end
 
       def determine_consecutive_days(days)
-        days.each_with_index.inject(0) do |streak, (day, index)|
-          streak += 1 if day + 1 == day.tomorrow
+        days.each_with_index.inject(1) do |streak, (day, index)|
+          streak += 1 if days[index+1] == day.tomorrow
           streak
         end
       end
