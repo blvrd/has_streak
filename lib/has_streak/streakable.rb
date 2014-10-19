@@ -21,6 +21,7 @@ module HasStreak
       def determine_consecutive_days(days)
         streak = 1
         days.each_with_index do |day, index|
+          break unless days.first == Date.current
           if days[index+1] == day.yesterday
             streak += 1
           else
