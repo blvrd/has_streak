@@ -8,13 +8,13 @@ module HasStreak
       def streak(association)
         return if self.send(association).blank?
 
-        days = get_days_in_descending_order(association)
+        days = get_days(association)
         determine_consecutive_days(days)
       end
 
       private
 
-      def get_days_in_descending_order(association)
+      def get_days(association)
         self.send(association).order(:created_at).pluck(:created_at).map(&:to_date).uniq
       end
 
