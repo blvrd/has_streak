@@ -19,9 +19,9 @@ module HasStreak
       end
 
       def determine_consecutive_days(days)
-        streak = 1
+        streak = first_day_in_collection_is_today?(days) ? 1 : 0
         days.each_with_index do |day, index|
-          break unless days.first == Date.current
+          break unless first_day_in_collection_is_today?(days)
           if days[index+1] == day.yesterday
             streak += 1
           else
@@ -29,6 +29,10 @@ module HasStreak
           end
         end
         streak
+      end
+
+      def first_day_in_collection_is_today?(days)
+        days.first == Date.current
       end
 
     end
