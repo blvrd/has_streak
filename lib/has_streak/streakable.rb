@@ -6,8 +6,6 @@ module HasStreak
 
     module InstanceMethods
       def streak(association)
-        return if self.send(association).blank?
-
         days = get_days(association)
         determine_consecutive_days(days)
       end

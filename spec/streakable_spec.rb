@@ -4,6 +4,12 @@ describe HasStreak::Streakable do
   context "#streak" do
     let(:user) { User.create(name: "garrett") }
 
+    context "when a user has no posts" do
+      it "returns 0" do
+        expect(user.streak(:posts)).to eq(0)
+      end
+    end
+
     context "when a user posted on each of the last three days" do
       it "returns a streak of 3" do
         user.posts.create(content: "hello", created_at: 2.days.ago)
