@@ -6,33 +6,44 @@ module HasStreak
 
     module InstanceMethods
       def streak(association)
-        days = get_days(association)
-        determine_consecutive_days(days)
+        Streak.new(self, association).length
       end
+    end
+  end
 
-      private
+  class Streak
+    def initialize(instance, association)
+      @instance = instance
+      @association = association
+    end
 
-      def get_days(association)
-        self.send(association).order("created_at DESC").pluck(:created_at).map(&:to_date).uniq
-      end
+    def length
+      determine_consecutive_days
+    end
 
-      def determine_consecutive_days(days)
-        streak = first_day_in_collection_is_today?(days) ? 1 : 0
-        days.each_with_index do |day, index|
-          break unless first_day_in_collection_is_today?(days)
-          if days[index+1] == day.yesterday
-            streak += 1
-          else
-            break
-          end
+    private
+
+    attr_reader :association, :instance
+
+    def days
+      @days ||= instance.send(association).order("created_at DESC").pluck(:created_at).map(&:to_date).uniq
+    end
+
+    def determine_consecutive_days
+      streak = first_day_in_collection_is_today? ? 1 : 0
+      days.each_with_index do |day, index|
+        break unless first_day_in_collection_is_today?
+        if days[index+1] == day.yesterday
+          streak += 1
+        else
+          break
         end
-        streak
       end
+      streak
+    end
 
-      def first_day_in_collection_is_today?(days)
-        days.first == Date.current
-      end
-
+    def first_day_in_collection_is_today?
+      days.first == Date.current
     end
   end
 end
