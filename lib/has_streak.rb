@@ -1,4 +1,5 @@
 require "has_streak/version"
+require "has_streak/streak"
 require "has_streak/streakable"
 require "active_record"
 
